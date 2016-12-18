@@ -6,9 +6,10 @@ const {
 	GraphQLInt,
 	GraphQLBoolean
 } = require('graphql');
+const { getVideoById } = require('./data');
 
 const videoType = new GraphQLObjectType({
-	name: 'Vide',
+	name: 'Video',
 	description: 'A video on Egghead.io',
 	fields: {
 		id: {
@@ -36,22 +37,21 @@ const queryType = new GraphQLObjectType({
 	fields: {
 		video: {
 			type: videoType,
-			resolve: () => new Promise((resolve) => {
-				resolve({
-					id: 'a',
-					title: 'GraphQL',
-					duration: 180,
-					watched: false
-				});
-			})
+			args:{
+				id:{
+					type: GraphQLID,
+					description: 'The id of the video.'
+				}
+			},
+			resolve: (_, args) => {
+				return getVideoById(args.id);
+			}
 		}
 	}
 });
 
 const schema = new GraphQLSchema({
-	query: queryType,
-	/*mutation,
-	suscription*/
+	query: queryType
 });
 
 module.exports = schema;
