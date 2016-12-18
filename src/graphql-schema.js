@@ -16,12 +16,14 @@ const {
 	createVideo
 } = require('./data');
 
+const nodeInterface = require('./node-interface');
+
 const videoType = new GraphQLObjectType({
 	name: 'Video',
 	description: 'A video on Egghead.io',
 	fields: {
 		id: {
-			type: GraphQLID,
+			type: new GraphQLNonNull(GraphQLID),
 			description: 'The id of the video.'
 		},
 		title: {
@@ -36,8 +38,10 @@ const videoType = new GraphQLObjectType({
 			type: GraphQLBoolean,
 			description: 'Whether or not the viewer has watched the video.'
 		}
-	}
+	},
+	interfaces: [nodeInterface]
 });
+exports.videoType = videoType;
 
 const queryType = new GraphQLObjectType({
 	name: 'QueryType',
@@ -103,4 +107,4 @@ const schema = new GraphQLSchema({
 	mutation: mutationType
 });
 
-module.exports = schema;
+module.exports.schema = schema;
