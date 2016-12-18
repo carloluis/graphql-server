@@ -50,14 +50,33 @@ query NodeInterface{
 
 * mutation
 ```graphql
-mutation M{
-	createVideo(video:{
-		title:"create an input object type", 
-		duration: 149, 
-		released: true
-	}) {
-		id,
-		title
+mutation AddVideoQuery($input: AddVideoInput!){
+	createVideo(input: $input){
+		video{
+			title,
+			duration
+		}
+	}
+}
+
+query AllVideosQuery{
+	videos{
+		edges{
+			node{
+				title
+			}
+		}
+	}
+}
+
+# Query Variables
+
+{
+	"input": {
+		"title": "Video Title",
+		"duration": 190,
+		"released": true,
+		"clientMutationId": "abcd"
 	}
 }
 ```
