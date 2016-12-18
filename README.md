@@ -7,12 +7,28 @@
 
 * query
 ```graphql
-query myQuery{
+query videosQuery{
 	videos {
 		id,
 		title,
 		duration,
 		watched
+	}
+}
+
+query videoQuery{
+	video (id: "a") {
+		id,
+		title
+	}
+}
+
+query NodeInterface{
+	node(id: "VmlkZW86YQ=="){
+		... on Video{
+			title,
+			duration
+		}
 	}
 }
 ```

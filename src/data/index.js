@@ -42,12 +42,21 @@ const createVideo = ({ title, duration, released }) => {
 		duration,
 		released
 	};
-	
+
 	videos.push(video);
 
 	return video;
 };
 
+const getObjectById = (type, id) => {
+	const types = {
+		video: getVideoById
+	};
+
+	return types[type](id);
+};
+
+exports.getObjectById = getObjectById;
 exports.getVideoById = getVideoById;
 exports.getVideos = getVideos;
 exports.createVideo = createVideo;
