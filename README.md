@@ -9,10 +9,10 @@
 ```graphql
 query myQuery{
 	videos {
-	    id,
-	    title,
-	    duration,
-	    watched
+		id,
+		title,
+		duration,
+		watched
 	}
 }
 ```
@@ -20,8 +20,13 @@ query myQuery{
 * mutation
 ```graphql
 mutation M{
-  createVideo(title:"new video", duration: 100, released: true) {
-    id
-  }
+	createVideo(video:{
+		title:"create an input object type", 
+		duration: 149, 
+		released: true
+	}) {
+		id,
+		title
+	}
 }
 ```
