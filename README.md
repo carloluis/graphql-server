@@ -5,14 +5,29 @@
 * Exec `npm install` and `npm start`
 * Open browser on <http://localhost:3000/graphql>
 
-* query
+* queries
 ```graphql
 query videosQuery{
 	videos {
-		id,
-		title,
-		duration,
-		watched
+		pageInfo{
+			startCursor,
+			endCursor
+		},
+		edges{
+			node{
+				id,
+				title,
+				duration
+			}
+		},
+		totalCount
+	},
+	filter: videos(first: 2){
+		edges{
+			node{
+				title
+			}
+		}
 	}
 }
 
